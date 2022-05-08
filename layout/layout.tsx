@@ -1,6 +1,8 @@
 import React from 'react'
-import { AppBar, Box, Drawer, List, ListItem, ListItemText, TextField, Typography } from '@mui/material';
+import { AppBar, Box, Button, Drawer, List, ListItem, Theme } from '@mui/material';
 import { styled } from '@mui/styles';
+import theme from '../src/theme';
+import SearchContainer from '../components/layout/SearchContainer';
 
 interface LayoutProps {
   children : any
@@ -14,10 +16,13 @@ const Main = styled("main")((({
   marginLeft: drawerWidth
 })))
 
-const CustomDrawer = styled(Drawer)((({
+
+
+const CustomDrawer = styled(Drawer)((({theme} : {theme : Theme}) => ({
   '& .MuiDrawer-paper' : {
     padding: 10,
     width: drawerWidth,
+    backgroundColor: theme.palette.primary.main,
   }
 })))
 
@@ -29,23 +34,37 @@ const Layout = ({children} : LayoutProps) => {
         sx={{
           width: drawerWidth
         }}
+        theme={theme}
       >
         <List>
-          {[1,2,3,4,5, 6].map(_option => (
+          {[1,2,3,4,5,6,7].map(_option => (
             <ListItem key={_option}>
-              <ListItemText>{_option}</ListItemText>
+              <Button
+                sx={{
+                  color: 'white'
+                }}
+              >
+                {_option}
+              </Button>
             </ListItem>
           ))}
         </List>
       </CustomDrawer>
-      <AppBar>
+      <AppBar
+        color='transparent'
+        elevation={0}
+        sx={{
+          padding: 1
+        }}
+      >
         <Box
           sx={{
-            marginLeft: `${drawerWidth}px`,
-            padding: 1
+            width: `calc(100% - ${drawerWidth}px)`,
+            marginLeft: 'auto'
           }}
         >
-          <TextField></TextField>
+          <SearchContainer drawerWidth={drawerWidth} />
+
         </Box>
       </AppBar>
       <Main>
