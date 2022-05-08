@@ -11,14 +11,15 @@ interface LayoutProps {
 const drawerWidth = 250;
 
 const Main = styled("main")((({
-  padding: 10,
-  paddingTop: 50,
+  padding: 20,
+  paddingTop: 80,
   marginLeft: drawerWidth
 })))
 
 const CustomAppBar = styled(AppBar)((({theme} : {theme : Theme}) => ({
   padding: 10,
-  borderBottom: `1px solid ${theme.palette.grey[100]}`
+  borderBottom: `1px solid ${theme.palette.grey[100]}`,
+  backgroundColor: 'white'
 })))
 
 
@@ -55,7 +56,6 @@ const Layout = ({children} : LayoutProps) => {
         </List>
       </CustomDrawer>
       <CustomAppBar
-        color='transparent'
         elevation={0}
         theme={theme}
       >
