@@ -16,6 +16,10 @@ const Main = styled("main")((({
   marginLeft: drawerWidth
 })))
 
+const CustomAppBar = styled(AppBar)((({theme} : {theme : Theme}) => ({
+  padding: 10,
+  borderBottom: `1px solid ${theme.palette.grey[100]}`
+})))
 
 
 const CustomDrawer = styled(Drawer)((({theme} : {theme : Theme}) => ({
@@ -50,12 +54,10 @@ const Layout = ({children} : LayoutProps) => {
           ))}
         </List>
       </CustomDrawer>
-      <AppBar
+      <CustomAppBar
         color='transparent'
         elevation={0}
-        sx={{
-          padding: 1
-        }}
+        theme={theme}
       >
         <Box
           sx={{
@@ -66,7 +68,7 @@ const Layout = ({children} : LayoutProps) => {
           <SearchContainer drawerWidth={drawerWidth} />
 
         </Box>
-      </AppBar>
+      </CustomAppBar>
       <Main>
         {children}
       </Main>
