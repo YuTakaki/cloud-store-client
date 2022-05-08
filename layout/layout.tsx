@@ -1,32 +1,50 @@
 import React from 'react'
-import { AppBar, Box, Drawer, List, ListItem, ListItemText, TextField } from '@mui/material';
+import { AppBar, Box, Drawer, List, ListItem, ListItemText, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/styles';
-import { NextPage } from 'next'
 
 interface LayoutProps {
   children : any
 }
 
+const drawerWidth = 250;
+
 const Main = styled("main")((({
-  padding: 10
+  padding: 10,
+  paddingTop: 50,
+  marginLeft: drawerWidth
+})))
+
+const CustomDrawer = styled(Drawer)((({
+  '& .MuiDrawer-paper' : {
+    padding: 10,
+    width: drawerWidth,
+  }
 })))
 
 const Layout = ({children} : LayoutProps) => {
   return (
     <Box>
-      <Drawer
+      <CustomDrawer
         variant='permanent'
+        sx={{
+          width: drawerWidth
+        }}
       >
         <List>
-          {[1,2,3,4,5].map(_option => (
+          {[1,2,3,4,5, 6].map(_option => (
             <ListItem key={_option}>
               <ListItemText>{_option}</ListItemText>
             </ListItem>
           ))}
         </List>
-      </Drawer>
+      </CustomDrawer>
       <AppBar>
-        <Box>
+        <Box
+          sx={{
+            marginLeft: `${drawerWidth}px`,
+            padding: 1
+          }}
+        >
           <TextField></TextField>
         </Box>
       </AppBar>
