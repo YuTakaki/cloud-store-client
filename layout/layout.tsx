@@ -1,36 +1,12 @@
-import React from 'react'
-import { AppBar, Avatar, Box, Button, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Theme } from '@mui/material';
-import { styled } from '@mui/styles';
-import theme from '../src/theme';
-import SearchContainer from '../components/layout/SearchContainer';
+import { useState } from 'react'
 
 interface LayoutProps {
   children : any
 }
 
-const drawerWidth = 260;
-
-const Main = styled("main")((({
-  padding: 20,
-  paddingTop: 80,
-  marginLeft: drawerWidth
-})))
-
-const CustomAppBar = styled(AppBar)((({theme} : {theme : Theme}) => ({
-  padding: 10,
-  borderBottom: `1px solid ${theme.palette.grey[100]}`,
-  backgroundColor: 'white'
-})))
-
-
-const CustomDrawer = styled(Drawer)((({theme} : {theme : Theme}) => ({
-  '& .MuiDrawer-paper' : {
-    width: drawerWidth,
-    backgroundColor: theme.palette.primary.main,
-  }
-})))
-
 const Layout = ({children} : LayoutProps) => {
+
+  const [currentOption, setCurrentOption] = useState("All");
 
   const nav_options = [
     'All',
@@ -41,60 +17,21 @@ const Layout = ({children} : LayoutProps) => {
   ]
 
   return (
-    <Box>
-      <CustomDrawer
-        variant='permanent'
-        sx={{
-          width: drawerWidth
-        }}
-        theme={theme}
-      >
-        <Avatar
-          alt="user"
-          sx={{
-            minWidth: '100px',
-            minHeight: '100px',
-            margin: '20px auto'
-          }}
-        />
-        <Button
-          variant="contained"
-          color="secondary"
-          sx={{
-            margin: 2
-          }}
-        >
-          Add
-        </Button>
-        <List>
+    <div className='flex h-screen text-gray-600'>
+      <nav className='w-1/4 max-w-xs' >
+        <ul>
           {nav_options.map(_option => (
-            <ListItemButton key={_option}>
-              {/* <ListItemIcon>
-              </ListItemIcon> */}
-              <ListItemText primary={_option} sx={{color: 'white'}}/>
-            </ListItemButton>
+            <li
+              className='text-2xl'
+              key={_option
+            }>{_option}</li>
           ))}
-        </List>
-      </CustomDrawer>
-      <CustomAppBar
-        elevation={0}
-        theme={theme}
-      >
-        <Box
-          sx={{
-            width: `calc(100% - ${drawerWidth}px)`,
-            marginLeft: 'auto'
-          }}
-        >
-          <SearchContainer drawerWidth={drawerWidth} />
-
-        </Box>
-      </CustomAppBar>
-      <Main>
+        </ul>
+      </nav>
+      <main className='w-full'>
         {children}
-      </Main>
-
-    </Box>
+      </main>
+    </div>
   )
 }
 
