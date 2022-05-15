@@ -3,7 +3,7 @@ import {
   MdArrowUpward
 } from 'react-icons/md'
 
-const BasicFilter = () => {
+const BasicSort = () => {
   const menuRef = useRef<HTMLMenuElement>(null)
   return (
     <div id="basic-filter" className="flex mt-12 mx-4 justify-end">
@@ -33,4 +33,4 @@ const BasicFilter = () => {
   )
 }
 
-export default BasicFilter
+export default BasicSort

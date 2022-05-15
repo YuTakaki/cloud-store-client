@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import SearchContainer from '../components/layout/SearchContainer';
+import {
+  MdClose,
+} from "react-icons/md"
 
 interface LayoutProps {
   children : any
@@ -10,6 +13,7 @@ interface LayoutProps {
 const Layout = ({children} : LayoutProps) => {
 
   const [currentOption, setCurrentOption] = useState("All");
+  const navRef = useRef<HTMLElement>(null)
 
   const nav_options = [
     'All',
@@ -19,12 +23,21 @@ const Layout = ({children} : LayoutProps) => {
     'Documents',
   ]
 
+  const hideNav = () => {
+    navRef.current?.classList.add('hidden');
+  }
+
   return (
     <div className='min-h-screen flex text-slate-400'>
-      <nav className='w-full max-w-xs hidden md:block relative' id="nav" >
-        {/* <div className=''> */}
-          <div className='fixed w-full max-w-xs bg-slate-800 h-screen'>
-            <figure className='flex justify-center m-3'>
+      <nav className='w-full max-w-xs hidden md:block fixed md:relative z-50' id="nav" ref={navRef} >
+        <div className='fixed w-full top-0 flex'>
+          <div className='w-full max-w-xs bg-slate-800 h-screen relative'>
+            <MdClose
+              className="block md:hidden absolute top-5 right-5"
+              size={30} 
+              onClick={hideNav} 
+              role="button"/>
+            <figure className='flex justify-center p-3'>
               <Image
                 src="/images/sample.jpg"
                 className='rounded-full object-cover'
@@ -35,7 +48,9 @@ const Layout = ({children} : LayoutProps) => {
             </figure>
             <div className='flex flex-col'>
               <h1 className='text-center text-3xl mb-2'>Hello Yu</h1>
-              <button className='bg-yellow-100 p-2 rounded-md w-3/4 m-auto text-slate-800 font-semibold'>Upload</button>
+              <button
+                className='bg-yellow-100 p-2 rounded-md w-3/4 m-auto text-slate-800 font-semibold'
+              >Upload</button>
             </div>
             <ul className='mt-3'>
               {nav_options.map(_option => (
@@ -56,7 +71,8 @@ const Layout = ({children} : LayoutProps) => {
               ))}
             </ul>
           </div>
-        {/* </div> */}
+          <div className='flex-1 bg-slate-800 opacity-70' onClick={hideNav} />
+        </div>
       </nav>
       <div className='w-full h-screen relative'>
         <SearchContainer />
