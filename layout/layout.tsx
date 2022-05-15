@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import SearchContainer from '../components/layout/SearchContainer';
 import {
   MdClose,
 } from "react-icons/md"
+import { closeMenus } from '../utils/closeMenu';
 
 interface LayoutProps {
   children : any
@@ -26,6 +27,15 @@ const Layout = ({children} : LayoutProps) => {
   const hideNav = () => {
     navRef.current?.classList.add('hidden');
   }
+
+  useEffect(() => {
+    window.addEventListener('mouseup', closeMenus);
+
+    return () => {
+      window.removeEventListener('mouseup', closeMenus);
+    }
+
+  }, []);
 
   return (
     <div className='min-h-screen flex text-slate-400'>

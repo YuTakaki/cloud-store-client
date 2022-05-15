@@ -10,20 +10,19 @@ const BasicSort = () => {
       <div className='flex gap-5 items-center'>
         <div className='relative'>
           <button
+            id='btn-menu-basic-sort'
             className=' hover:bg-gray-200 px-4 py-2 rounded font-semibold text-lg'
-            onMouseDown={() => menuRef.current?.classList.add("hidden")}
-            onMouseUp={() => menuRef.current?.classList.remove("hidden")}
+            onClick={() => menuRef.current?.classList.toggle("hidden")}
           >Date</button>
           <menu
             ref={menuRef}
+            id="menu-basic-sort"
             className='absolute z-10 bg-white card w-28 mt-2 p-2 -left-10 hidden duration-500'
           >
-            <ul>
-              <li>sdsd</li>
-              <li>sdsd</li>
-              <li>sdsd</li>
-              <li>sdsd</li>
-            </ul>
+            <li>sdsd</li>
+            <li>sdsd</li>
+            <li>sdsd</li>
+            <li>sdsd</li>
           </menu>
         </div>
         <MdArrowUpward size={30} role="button" className=' hover:bg-gray-200 rounded-full'/>
