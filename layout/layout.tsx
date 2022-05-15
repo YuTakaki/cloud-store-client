@@ -30,7 +30,7 @@ const Layout = ({children} : LayoutProps) => {
   return (
     <div className='min-h-screen flex text-slate-400'>
       <nav className='w-full max-w-xs hidden md:block fixed md:relative z-50' id="nav" ref={navRef} >
-        <div className='fixed w-full top-0 flex'>
+        <div className='fixed w-full md:max-w-xs top-0 flex'>
           <div className='w-full max-w-xs bg-slate-800 h-screen relative'>
             <MdClose
               className="block md:hidden absolute top-5 right-5"
@@ -71,7 +71,7 @@ const Layout = ({children} : LayoutProps) => {
               ))}
             </ul>
           </div>
-          <div className='flex-1 bg-slate-800 opacity-70' onClick={hideNav} />
+          <div className='md:hidden flex-1 bg-slate-800 opacity-70' onClick={hideNav} />
         </div>
       </nav>
       <div className='w-full h-screen relative'>
