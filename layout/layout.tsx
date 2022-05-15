@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react'
+import SearchContainer from '../components/layout/SearchContainer';
 
 interface LayoutProps {
   children : any
@@ -58,15 +59,8 @@ const Layout = ({children} : LayoutProps) => {
         {/* </div> */}
       </nav>
       <div className='w-full h-screen relative'>
-        <header className='fixed bg-white z-50 p-2 w-full'>
-          <div>
-            <i></i>
-            <input type='text' />
-            <i></i>
-          </div>
-
-        </header>
-
+        <SearchContainer />
+        
         <main className='p-2'>
           {children}
         </main>

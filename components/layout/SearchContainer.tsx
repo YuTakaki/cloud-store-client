@@ -1,54 +1,31 @@
 import React, { useState } from 'react'
-import { styled } from '@mui/styles';
-import theme from '../../src/theme';
-import SearchIcon from '@mui/icons-material/Search';
-import CloseIcon from '@mui/icons-material/Close';
-import { Box, IconButton, TextField, Theme } from '@mui/material';
-
-interface SearchContainerProps {
-  drawerWidth: number
-}
-const SearchBox = styled(Box)((({theme, drawerWidth} : {theme : Theme, drawerWidth: number}) => ({
-  backgroundColor: theme.palette.grey[100],
-  margin: 'auto',
-  width: '40%',
-  borderRadius: '7px',
-  marginLeft: `${drawerWidth}px`,
-  padding: '3px 7px',
-  display: 'flex',
-  alignItems: 'center'
-})));
+import {
+  MdSearch,
+  MdClose
+} from "react-icons/md"
 
 
-const SearchContainer = ({ drawerWidth } : SearchContainerProps) => {
+
+const SearchContainer = () => {
 
   const [search, setSearch] = useState('');
   
   return (
-    <SearchBox
-      theme={theme}
-      drawerWidth={drawerWidth}
-    >
-      <IconButton>
-        <SearchIcon />
-      </IconButton>
-      <TextField
-        variant='standard'
-        fullWidth
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        InputProps={{
-          disableUnderline: true,
-        }}
-      />
-      {search && (
-        <IconButton
-          onClick={() => setSearch('')}
-        >
-          <CloseIcon />
-        </IconButton>
-      )}
-    </SearchBox>
+    <header className='fixed bg-white z-50 p-2 w-full'>
+      <div className=' bg-gray-200 flex p-2 px-4 w-full max-w-xs rounded items-center'>
+        <MdSearch size={20}/>
+        <input
+          type='text'
+          className=' flex-1 outline-none border-none bg-transparent text-gray-800 mx-2'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        {search && (
+          <MdClose size={20} role="button" onClick={() => setSearch("")}/>
+        )}
+      </div>
+
+    </header>
   )
 }
 
