@@ -1,39 +1,35 @@
 import React from 'react'
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
-import { styled } from '@mui/styles';
+import Image from 'next/image';
 //icons
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-
-const CustomGrid = styled('div')((({
-  display: 'grid',
-  gridGap: 10,
-  gridTemplateColumns: 'repeat(auto-fill,minmax(220px,1fr))',
-})));
+import {
+  MdImage
+} from "react-icons/md"
 
 const GridFiles = () => {
   return (
-    <CustomGrid>
-      {[...new Array(53)].map(_file => (
-        <Card key={_file}>
-          <CardMedia
-            component="img"
-            height="194"
-            src="images/sample.jpg"
-          />
-          <CardContent
-            sx={{
-              display: 'flex',
-              gridGap: '10px'
-            }}
-          >
-            <PictureAsPdfIcon />
-            <Typography>
-              pdf.content
-            </Typography> 
-          </CardContent>
-        </Card>
+    <div className='grid gap-5' style={{
+      gridTemplateColumns: 'repeat(auto-fill,minmax(220px,1fr))'
+    }}>
+      {[...new Array(53)].map((_file, i) => (
+        <div
+          key={i}
+          className="border border-solid border-gray-200 rounded-md shadow-md overflow-hidden"
+        >
+          <figure className='w-full h-36 relative'>
+            <Image
+              className='object-cover'
+              layout='fill'
+              src="/images/sample.jpg"
+              alt=""
+            />
+          </figure>
+          <div className='flex gap-2 p-2 items-center'>
+            <MdImage size={20} />
+            <p>sample.jpg</p>
+          </div>
+        </div>
       ))}
-    </CustomGrid>
+    </div>
   )
 }
 
