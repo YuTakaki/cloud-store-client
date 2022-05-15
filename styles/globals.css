@@ -5,3 +5,14 @@
 .card {
   @apply border border-solid border-gray-200 rounded-md shadow-md overflow-hidden;
 }
+
+.input {
+  @apply p-2 border border-solid m-2 rounded
+}
+.btn {
+  @apply px-4 py-2 font-semibold text-lg m-1 rounded shadow-md
+}
+
+* {
+  box-sizing: border-box;
+}

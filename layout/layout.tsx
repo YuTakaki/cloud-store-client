@@ -6,6 +6,7 @@ import {
   MdClose,
 } from "react-icons/md"
 import { closeMenus } from '../utils/closeMenu';
+import { useRouter } from 'next/router';
 
 interface LayoutProps {
   children : any
@@ -17,16 +18,17 @@ const Layout = ({children} : LayoutProps) => {
   const navRef = useRef<HTMLElement>(null)
 
   const nav_options = [
-    'All',
-    'Images',
-    'Videos',
-    'Music',
-    'Documents',
+    'all',
+    'images',
+    'videos',
+    'music',
+    'documents',
   ]
 
   const hideNav = () => {
     navRef.current?.classList.add('hidden');
   }
+
 
   useEffect(() => {
     window.addEventListener('mouseup', closeMenus);
