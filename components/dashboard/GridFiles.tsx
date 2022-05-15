@@ -13,7 +13,7 @@ const CustomGrid = styled('div')((({
 const GridFiles = () => {
   return (
     <CustomGrid>
-      {[...new Array(13)].map(_file => (
+      {[...new Array(53)].map(_file => (
         <Card key={_file}>
           <CardMedia
             component="img"
