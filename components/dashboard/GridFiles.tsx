@@ -13,7 +13,7 @@ const GridFiles = () => {
       {[...new Array(53)].map((_file, i) => (
         <div
           key={i}
-          className="border border-solid border-gray-200 rounded-md shadow-md overflow-hidden"
+          className="card"
         >
           <figure className='w-full h-36 relative'>
             <Image
