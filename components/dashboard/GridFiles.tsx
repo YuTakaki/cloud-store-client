@@ -7,7 +7,7 @@ import {
 
 const GridFiles = () => {
   return (
-    <div className='grid gap-5' style={{
+    <div className='grid gap-5 m-4' style={{
       gridTemplateColumns: 'repeat(auto-fill,minmax(220px,1fr))'
     }}>
       {[...new Array(53)].map((_file, i) => (
