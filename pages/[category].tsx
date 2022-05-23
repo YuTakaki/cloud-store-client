@@ -3,6 +3,7 @@ import Layout from '../layout/layout';
 import GridFiles from '../components/dashboard/GridFiles';
 import { useRouter } from 'next/router';
 import BasicSort from '../components/dashboard/BasicSort';
+import PrivateRoute from '../components/PrivateRoute';
 
 const Category: NextPage = () => {
 
@@ -15,4 +16,4 @@ const Category: NextPage = () => {
   )
 }
 
-export default Category;
+export default PrivateRoute(Category);
