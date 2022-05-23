@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Layout from '../layout/layout';
 import BasicSort from '../components/dashboard/BasicSort';
 import GridFiles from '../components/dashboard/GridFiles';
+import PrivateRoute from '../components/PrivateRoute';
 
 const Home: NextPage = () => {
 
@@ -13,4 +14,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default PrivateRoute(Home)
