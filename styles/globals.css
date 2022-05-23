@@ -7,7 +7,7 @@
 }
 
 .input {
-  @apply p-2 border border-solid m-2 rounded
+  @apply p-2 border border-solid m-2 rounded outline-gray-500 outline-2
 }
 .btn {
   @apply px-4 py-2 font-semibold text-lg m-1 rounded shadow-md
