@@ -14,11 +14,11 @@ interface LayoutProps {
 
 const Layout = ({children} : LayoutProps) => {
 
-  const [currentOption, setCurrentOption] = useState("All");
+  const [currentOption, setCurrentOption] = useState("");
   const navRef = useRef<HTMLElement>(null)
 
   const nav_options = [
-    'all',
+    '',
     'images',
     'videos',
     'music',

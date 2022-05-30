@@ -1,10 +1,11 @@
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import Layout from '../layout/layout';
 import BasicSort from '../components/dashboard/BasicSort';
 import GridFiles from '../components/dashboard/GridFiles';
 import PrivateRoute from '../components/PrivateRoute';
 
 const Home: NextPage = () => {
+
 
   return (
     <Layout>
@@ -14,4 +15,8 @@ const Home: NextPage = () => {
   )
 }
 
-export default PrivateRoute(Home)
+export const getServerSideProps: GetServerSideProps = PrivateRoute(async() => {
+  return {props:{}}
+})
+
+export default Home
