@@ -21,6 +21,7 @@ const Login = () => {
   })
 
   const loginSubmit = (value : loginFieldsType) => {
+    console.log(value)
   }
   return (
     <main className='w-full h-full flex justify-center mt-6'>
@@ -36,8 +37,9 @@ const Login = () => {
           <InputField type='text' className='input' name='usernameOrEmail'/>
           <InputField type='password' className='input' name='password'/>
           <p className='text-center'>or</p>
-          <button className='btn bg-red-400 text-white'>Google</button>
-          <button className='btn bg-blue-700 text-white'>Facebook</button>
+          <input type='submit' className='btn bg-gray-800 text-white cursor-pointer' value='login' />
+          <button type='button' className='btn bg-red-400 text-white'>Google</button>
+          <button type='button' className='btn bg-blue-700 text-white'>Facebook</button>
 
           <span className='text-center mt-4'>
             Dont have an account yet?
