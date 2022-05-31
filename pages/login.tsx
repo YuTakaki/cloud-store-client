@@ -43,8 +43,8 @@ const Login = () => {
           className='w-full max-w-sm card p-3 flex flex-col m-2'
         >
           <h1 className=' text-center text-3xl m-2'>Login</h1>
-          <InputField type='text' className='input' name='usernameOrEmail'/>
-          <InputField type='password' className='input' name='password'/>
+          <InputField type='text' className='input' name='usernameOrEmail' placeholder="username or email"/>
+          <InputField type='password' className='input' name='password' placeholder='password'/>
           <p className='text-center'>or</p>
           <input type='submit' className='btn bg-gray-800 text-white cursor-pointer' value='login' />
           <button type='button' className='btn bg-red-400 text-white'>Google</button>

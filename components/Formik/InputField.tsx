@@ -3,24 +3,25 @@ import React from 'react'
 
 interface InputFieldProps {
   type : string,
-  className: string
+  className: string,
+  placeholder: string
 }
 
-const InputField = ({type, className, ...props} :InputFieldProps & FieldHookConfig<string>) => {
+const InputField = ({type, className,placeholder, ...props} :InputFieldProps & FieldHookConfig<string>) => {
   const [fields, meta] = useField(props)
   return (
-    <div className='flex flex-col'>
+    <>
       <input
         type={type}
         className={`${className} ${meta.touched && meta.error ? 'border-red-500' : ''}`}
         {...fields}
-        placeholder='username or email'
+        placeholder={placeholder}
       />
       {meta.touched && meta.error && (
         <p className='text-sm text-red-500 px-3 -mt-2'>{meta.error}</p>
       )}
 
-    </div>
+    </>
   )
 }
 
