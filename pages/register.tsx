@@ -1,12 +1,24 @@
 import { Form, Formik } from 'formik';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { FormEvent } from 'react'
 import * as yup from 'yup';
 import InputField from '../components/Formik/InputField';
+import { post } from '../utils/requests';
 
+type registerFields = {
+  username: string,
+  email: string,
+  password: string,
+  first_name: string,
+  last_name: string,
+  retry_password: string,
+}
 const Register = () => {
 
-  const initialValues = {
+  const router = useRouter();
+
+  const initialValues : registerFields = {
     username: '',
     email: '',
     password: '',
@@ -22,11 +34,18 @@ const Register = () => {
       if (val && val.length < 8) return false
       return true
     }),
-    first_name: yup.string().required(),
-    last_name: yup.string().required(),
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
   })
 
-  const RegisterSubmit = () => {
+  const RegisterSubmit = async(value: registerFields) => {
+    try {
+      await post('/api/auth/register', value);
+      router.push('/');
+    } catch (error) {
+      console.log(error);
+      
+    }
     
   }
   return (
@@ -39,15 +58,21 @@ const Register = () => {
         <Form className='w-full max-w-sm card p-3 flex flex-col m-2'>
           <h1 className=' text-center text-3xl m-2'>Register</h1>
           <div className='flex flex-col xs:flex-row'>
-            <InputField type='text' className='input xs:w-1/2' name='first_name' placeholder='first name'/>
-            <InputField type='text' className='input xs:w-1/2' name='last_name' placeholder='last name'/>
+            <div className=''>
+              <InputField type='text' className='input' name='firstName' placeholder='first name'/>
+            </div>
+            <div className=''>
+            <InputField type='text' className='input' name='lastName' placeholder='last name'/>
+
+            </div>
           </div>
           <InputField type='text' className='input' name='username' placeholder='username'/>
           <InputField type='text' className='input' name='email' placeholder='email'/>
           <InputField type='text' className='input' name='password' placeholder='password'/>
+          <input type='submit' className='btn bg-gray-800 text-white cursor-pointer' value='register' />
           <p className='text-center'>or</p>
-          <button className='btn bg-red-400 text-white'>Google</button>
-          <button className='btn bg-blue-700 text-white'>Facebook</button>
+          <button type='button' className='btn bg-red-400 text-white'>Google</button>
+          <button type='button' className='btn bg-blue-700 text-white'>Facebook</button>
 
           <span className='text-center mt-4'>
             Already have an account?
