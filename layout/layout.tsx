@@ -18,7 +18,7 @@ const Layout = ({children} : LayoutProps) => {
   const navRef = useRef<HTMLElement>(null)
 
   const nav_options = [
-    '',
+    'all',
     'images',
     'videos',
     'music',
@@ -66,7 +66,7 @@ const Layout = ({children} : LayoutProps) => {
             </div>
             <ul className='mt-3'>
               {nav_options.map(_option => (
-                <Link href={`/${_option}`} key={_option}>
+                <Link href={`/${_option === 'all' ? "" : _option}`} key={_option}>
                   <a>
                     <li
                       className='text-2xl'
