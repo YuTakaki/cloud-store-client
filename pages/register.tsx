@@ -1,10 +1,11 @@
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { FormEvent } from 'react'
 import * as yup from 'yup';
 import InputField from '../components/Formik/InputField';
 import { post } from '../utils/requests';
+import axios, { Axios } from 'axios';
 
 type registerFields = {
   username: string,
@@ -38,15 +39,16 @@ const Register = () => {
     lastName: yup.string().required(),
   })
 
-  const RegisterSubmit = async(value: registerFields) => {
+  const RegisterSubmit = async(value: registerFields, {setErrors}: FormikHelpers<registerFields>) => {
     try {
-      await post('/api/auth/register', value);
+      const register = await post('/api/auth/register', value);
+      console.log(register);
       router.push('/');
-    } catch (error) {
-      console.log(error);
-      
+    } catch (error : any) {
+      if(axios.isAxiosError(error)) {
+        setErrors(error.response!.data);
+      }
     }
-    
   }
   return (
     <main className='w-full h-full flex justify-center mt-6'>
@@ -68,7 +70,7 @@ const Register = () => {
           </div>
           <InputField type='text' className='input' name='username' placeholder='username'/>
           <InputField type='text' className='input' name='email' placeholder='email'/>
-          <InputField type='text' className='input' name='password' placeholder='password'/>
+          <InputField type='password' className='input' name='password' placeholder='password'/>
           <input type='submit' className='btn bg-gray-800 text-white cursor-pointer' value='register' />
           <p className='text-center'>or</p>
           <button type='button' className='btn bg-red-400 text-white'>Google</button>
