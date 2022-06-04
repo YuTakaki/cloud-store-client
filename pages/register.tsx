@@ -41,11 +41,10 @@ const Register = () => {
 
   const RegisterSubmit = async(value: registerFields, {setErrors}: FormikHelpers<registerFields>) => {
     try {
-      const register = await post('/api/auth/register', value);
-      console.log(register);
+      await post('/api/auth/register', value);
       router.push('/');
     } catch (error : any) {
-      if(axios.isAxiosError(error)) {
+      if(axios.isAxiosError(error) && error.response!.data) {
         setErrors(error.response!.data);
       }
     }

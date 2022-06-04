@@ -1,10 +1,11 @@
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import Link from 'next/link';
 import * as yup from 'yup';
 import React, { FormEvent } from 'react'
 import InputField from '../components/Formik/InputField';
 import { post } from '../utils/requests';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 type loginFieldsType = {
   usernameOrEmail: string,
@@ -24,12 +25,14 @@ const Login = () => {
     password : yup.string().required('Input password')
   })
 
-  const loginSubmit = async(value : loginFieldsType) => {
+  const loginSubmit = async(value : loginFieldsType, {setErrors} : FormikHelpers<loginFieldsType>) => {
     try {
-      const loginRequest = await post('/api/auth/login', value);
+      await post('/api/auth/login', value);
       router.push('/');
     } catch (error) {
-      console.log(error)
+      if (axios.isAxiosError(error) && error.response!.data) {
+        setErrors(error.response!.data)
+      }
     }
   }
   return (
