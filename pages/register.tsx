@@ -57,12 +57,12 @@ const Register = () => {
       >
         <Form className='w-full max-w-sm card p-3 flex flex-col m-2'>
           <h1 className=' text-center text-3xl m-2'>Register</h1>
-          <div className='flex flex-col xs:flex-row'>
-            <div className=''>
-              <InputField type='text' className='input' name='firstName' placeholder='first name'/>
+          <div className='flex flex-col xs:flex-row gap-1'>
+            <div>
+              <InputField type='text' className='input w-full !m-0' name='firstName' placeholder='first name'/>
             </div>
-            <div className=''>
-            <InputField type='text' className='input' name='lastName' placeholder='last name'/>
+            <div>
+            <InputField type='text' className='input w-full !m-0' name='lastName' placeholder='last name'/>
 
             </div>
           </div>
