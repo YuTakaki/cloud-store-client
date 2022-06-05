@@ -5,24 +5,27 @@ import { useRouter } from 'next/router';
 import BasicSort from '../components/dashboard/BasicSort';
 import PrivateRoute from '../components/PrivateRoute';
 import { useEffect } from 'react';
+import { get } from '../utils/requests';
 
-const Category: NextPage = () => {
+interface CategoryProps {
+  files : []
+}
+const Category: NextPage<CategoryProps> = ({ files } : CategoryProps) => {
 
-  const router = useRouter();
   return (
     <Layout>
       <BasicSort />
-      <GridFiles />
+      <GridFiles files={files}/>
     </Layout>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = PrivateRoute(async(ctx) => {
   const {
-    query
+    query,
+    req
   } = ctx;
   const {category} = query;
-  console.log(query);
   const pages = ['', 'images', 'videos', 'music', 'documents']
   if (!pages.includes(category as string)) {
     return {
@@ -32,7 +35,24 @@ export const getServerSideProps: GetServerSideProps = PrivateRoute(async(ctx) =>
       props:{},
     }
   }
-  return {props:{}}
+  const props = {
+    files : []
+  }
+  try {
+    const getFiles = await get(`/api/upload/type/${category === "" ? 'all' : category}`, {
+      headers : {
+        Cookie: req.headers.cookie
+      }
+    })
+    props.files = getFiles.data
+  } catch (error) {
+    console.log(error);
+  }
+  return {
+    props : {
+      ...props
+    }
+  }
 })
 
 export default Category;
