@@ -1,13 +1,11 @@
 import Image from 'next/image'
 import React from 'react'
 import { MdImage } from 'react-icons/md'
+import { CardProps } from '../../types/interfaces'
 import { fileType } from '../../types/types'
 import { get } from '../../utils/requests'
 
-interface ImageCardProps {
-  file : fileType
-}
-const ImageCard = ( {file} : ImageCardProps) => {
+const ImageCard = ( {file} : CardProps) => {
   return (
     <div
       className="card"
@@ -22,7 +20,7 @@ const ImageCard = ( {file} : ImageCardProps) => {
       </figure>
       <div className='flex gap-2 p-2 items-center'>
         <MdImage size={20} />
-        <p>sample.jpg</p>
+        <p className=' truncate'>{file.filename}</p>
       </div>
     </div>
   )
