@@ -1,10 +1,8 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import Layout from '../layout/layout';
 import GridFiles from '../components/dashboard/GridFiles';
-import { useRouter } from 'next/router';
 import BasicSort from '../components/dashboard/BasicSort';
 import PrivateRoute from '../components/PrivateRoute';
-import { useEffect } from 'react';
 import { get } from '../utils/requests';
 
 interface CategoryProps {
@@ -29,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = PrivateRoute(async(ctx) =>
   const pages = {
     '' : 'all',
     images : 'image',
-    videos : '',
+    video : 'video',
     music : 'audio',
     document : 'text'
   }

@@ -3,6 +3,7 @@ import { fileType } from '../../types/types';
 import AudioCard from '../Cards/AudioCard';
 import ImageCard from '../Cards/ImageCard';
 import TextFileCard from '../Cards/TextFileCard';
+import VideoCard from '../Cards/VideoCard';
 
 interface GridFilesProps {
   files : []
@@ -22,6 +23,9 @@ const GridFiles = ({ files } : GridFilesProps) => {
           )}
           {_file.contentType.includes('audio') && (
             <AudioCard key={i} file={_file} />
+          )}
+          {_file.contentType.includes('video') && (
+            <VideoCard key={i} file={_file} />
           )}
         </>
       ))}
