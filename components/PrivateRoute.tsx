@@ -18,7 +18,6 @@ const PrivateRoute = (gssp : GetServerSideProps) => {
           Cookie: req.headers.cookie
         }
       });
-      console.log('asas')
       
     } catch (error:any) {
       console.log(error.response)

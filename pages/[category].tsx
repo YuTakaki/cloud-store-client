@@ -26,8 +26,14 @@ export const getServerSideProps: GetServerSideProps = PrivateRoute(async(ctx) =>
     req
   } = ctx;
   const {category} = query;
-  const pages = ['', 'images', 'videos', 'music', 'documents']
-  if (!pages.includes(category as string)) {
+  const pages = {
+    '' : 'all',
+    images : 'image',
+    videos : '',
+    music : 'audio',
+    document : 'text'
+  }
+  if (!((category as string) in pages )) {
     return {
       redirect: {
         destination: '/404',
@@ -39,7 +45,8 @@ export const getServerSideProps: GetServerSideProps = PrivateRoute(async(ctx) =>
     files : []
   }
   try {
-    const getFiles = await get(`/api/upload/type/${category === "" ? 'all' : category}`, {
+    const type = pages[category as '' | 'images' | 'videos' | 'music' | 'document']
+    const getFiles = await get(`/api/upload/type/${type}`, {
       headers : {
         Cookie: req.headers.cookie
       }

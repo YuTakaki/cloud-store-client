@@ -20,9 +20,9 @@ const Layout = ({children} : LayoutProps) => {
   const nav_options = [
     'all',
     'images',
-    'videos',
+    'video',
     'music',
-    'documents',
+    'document',
   ]
 
   const hideNav = () => {

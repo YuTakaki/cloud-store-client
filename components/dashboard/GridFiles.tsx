@@ -1,5 +1,6 @@
 import React from 'react'
 import { fileType } from '../../types/types';
+import AudioCard from '../Cards/AudioCard';
 import ImageCard from '../Cards/ImageCard';
 import TextFileCard from '../Cards/TextFileCard';
 
@@ -18,6 +19,9 @@ const GridFiles = ({ files } : GridFilesProps) => {
           )}
           {_file.contentType.includes('text') && (
             <TextFileCard key={i} file={_file} />
+          )}
+          {_file.contentType.includes('audio') && (
+            <AudioCard key={i} file={_file} />
           )}
         </>
       ))}
