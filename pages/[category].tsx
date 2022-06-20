@@ -4,16 +4,27 @@ import GridFiles from '../components/dashboard/GridFiles';
 import BasicSort from '../components/dashboard/BasicSort';
 import PrivateRoute from '../components/PrivateRoute';
 import { get } from '../utils/requests';
+import { useDispatch } from 'react-redux';
+import { setFiles } from '../store/slicers/filesSlicer';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 interface CategoryProps {
   files : []
 }
 const Category: NextPage<CategoryProps> = ({ files } : CategoryProps) => {
 
+  const dispatch = useDispatch()
+  const allFiles = useSelector((state : any) => state.fileReducer)
+
+  useEffect(() => {
+    dispatch(setFiles(files))
+  }, [dispatch, files])
+
   return (
     <Layout>
       <BasicSort />
-      <GridFiles files={files}/>
+      <GridFiles files={allFiles}/>
     </Layout>
   )
 }
