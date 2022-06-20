@@ -11,7 +11,7 @@ const VideoCard = ({file} : CardProps) => {
       </figure>
       <div className='flex gap-2 p-2 items-center'>
         <MdVideoLibrary size={20} />
-        <p className=' truncate'>{file.filename}</p>
+        <p className='truncate'>{file.filename}</p>
       </div>
     </div>
   )

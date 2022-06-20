@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import SearchContainer from '../components/layout/SearchContainer';
 import {
   MdClose,
@@ -16,6 +16,7 @@ const Layout = ({children} : LayoutProps) => {
 
   const [currentOption, setCurrentOption] = useState("");
   const navRef = useRef<HTMLElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const nav_options = [
     'all',
@@ -24,20 +25,21 @@ const Layout = ({children} : LayoutProps) => {
     'music',
     'document',
   ]
-
+  
+  useEffect(() => {
+    window.addEventListener('mouseup', closeMenus);
+    return () => {
+      window.removeEventListener('mouseup', closeMenus);
+    }
+  }, []);
+  
   const hideNav = () => {
     navRef.current?.classList.add('hidden');
   }
 
-
-  useEffect(() => {
-    window.addEventListener('mouseup', closeMenus);
-
-    return () => {
-      window.removeEventListener('mouseup', closeMenus);
-    }
-
-  }, []);
+  const fileHandlerOnChange = (e : ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.files)
+  }
 
   return (
     <div className='min-h-screen flex text-slate-400'>
@@ -62,7 +64,17 @@ const Layout = ({children} : LayoutProps) => {
               <h1 className='text-center text-3xl mb-2'>Hello Yu</h1>
               <button
                 className='bg-yellow-100 p-2 rounded-md w-3/4 m-auto text-slate-800 font-semibold'
-              >Upload</button>
+                onClick={() => fileInputRef.current?.click()}
+              >
+                Upload
+              </button>
+              <input
+                ref={fileInputRef}
+                type='file'
+                className="hidden"
+                multiple={true}
+                onChange={fileHandlerOnChange}
+              />
             </div>
             <ul className='mt-3'>
               {nav_options.map(_option => (
