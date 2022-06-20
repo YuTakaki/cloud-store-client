@@ -43,7 +43,7 @@ export const getServerSideProps: GetServerSideProps = PrivateRoute(async(ctx) =>
     files : []
   }
   try {
-    const type = pages[category as '' | 'images' | 'videos' | 'music' | 'document']
+    const type = pages[category as '' | 'images' | 'video' | 'music' | 'document']
     const getFiles = await get(`/api/upload/type/${type}`, {
       headers : {
         Cookie: req.headers.cookie
