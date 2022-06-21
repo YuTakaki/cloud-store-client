@@ -16,10 +16,12 @@ interface LayoutProps {
 
 const Layout = ({children} : LayoutProps) => {
 
-  const [currentOption, setCurrentOption] = useState("");
+  const [currentOption, setCurrentOption] = useState("all");
   const navRef = useRef<HTMLElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
+  const router = useRouter()
+  const { category } = router.query
 
   const nav_options = [
     'all',
@@ -35,6 +37,10 @@ const Layout = ({children} : LayoutProps) => {
       window.removeEventListener('mouseup', closeMenus);
     }
   }, []);
+
+  useEffect(() => {
+    setCurrentOption(category ? category : 'all')
+  }, [category])
   
   const hideNav = () => {
     navRef.current?.classList.add('hidden');
@@ -89,10 +95,13 @@ const Layout = ({children} : LayoutProps) => {
             </div>
             <ul className='mt-3'>
               {nav_options.map(_option => (
-                <Link href={`/${_option === 'all' ? "" : _option}`} key={_option}>
+                <Link
+                  href={`/${_option === 'all' ? "" : _option}`}
+                  key={_option}
+                >
                   <a>
                     <li
-                      className='text-2xl'
+                      className={`text-2xl ${_option === currentOption ? 'bg-slate-400 text-slate-800' : 'bg-transparent'}`}
                     >
                       <button 
                         className='hover:bg-slate-400 hover:text-slate-800 w-full text-left p-2 pl-8'
