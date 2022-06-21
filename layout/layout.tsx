@@ -30,6 +30,13 @@ const Layout = ({children} : LayoutProps) => {
     'music',
     'document',
   ]
+  const pages = {
+    '' : 'all',
+    images : 'image',
+    video : 'video',
+    music : 'audio',
+    document : 'text'
+  }
   
   useEffect(() => {
     window.addEventListener('mouseup', closeMenus);
@@ -39,7 +46,7 @@ const Layout = ({children} : LayoutProps) => {
   }, []);
 
   useEffect(() => {
-    setCurrentOption(category ? category : 'all')
+    setCurrentOption(category ? pages[category as '' | 'images' | 'video' | 'music' | 'document'] : 'all')
   }, [category])
   
   const hideNav = () => {
@@ -53,7 +60,7 @@ const Layout = ({children} : LayoutProps) => {
       for (let x = 0; x < files.length; x++) {
         formData.append('files', files[x])
       }
-      dispatch(uploadFilesAction(formData))
+      dispatch(uploadFilesAction({files : formData, currentOption : currentOption}))
 
     }
   }

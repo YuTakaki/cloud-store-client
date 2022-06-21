@@ -5,8 +5,8 @@ import { uploadFilesAction } from "../actions/filesAction";
 type filesSlicerinititalType = {
   isLoading : boolean
   files : fileType[]
-
 }
+
 const initialState = {
   isLoading : false,
   files : []
@@ -15,9 +15,8 @@ const filesSlicer = createSlice({
   name: 'files',
   initialState,
   reducers:{
-    setFiles : (state, action) => {
+    setFiles : (state : filesSlicerinititalType, action : PayloadAction<any>) => {
       state.files = action.payload
-      return 
     }
   },
   extraReducers:(builder) => {
@@ -27,7 +26,8 @@ const filesSlicer = createSlice({
 
     builder.addCase(uploadFilesAction.fulfilled, (state : filesSlicerinititalType, action : PayloadAction<any>) => {
       state.isLoading = false;
-      state.files = action.payload;
+      console.log(action.payload)
+      state.files = [...state.files, ...action.payload.files]
     })
 
     builder.addCase(uploadFilesAction.rejected, (state : filesSlicerinititalType, _) => {
