@@ -15,7 +15,7 @@ interface CategoryProps {
 const Category: NextPage<CategoryProps> = ({ files } : CategoryProps) => {
 
   const dispatch = useDispatch()
-  const allFiles = useSelector((state : any) => state.fileReducer)
+  const allFiles = useSelector((state : any) => state.fileReducer.files)
 
   useEffect(() => {
     dispatch(setFiles(files))
@@ -60,6 +60,7 @@ export const getServerSideProps: GetServerSideProps = PrivateRoute(async(ctx) =>
         Cookie: req.headers.cookie
       }
     })
+    console.log(getFiles.data)
     props.files = getFiles.data
   } catch (error) {
     console.log(error);

@@ -7,6 +7,8 @@ import {
 } from "react-icons/md"
 import { closeMenus } from '../utils/closeMenu';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { uploadFilesAction } from '../store/actions/filesAction';
 
 interface LayoutProps {
   children : any
@@ -15,8 +17,9 @@ interface LayoutProps {
 const Layout = ({children} : LayoutProps) => {
 
   const [currentOption, setCurrentOption] = useState("");
-  const navRef = useRef<HTMLElement>(null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const navRef = useRef<HTMLElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
 
   const nav_options = [
     'all',
@@ -37,8 +40,16 @@ const Layout = ({children} : LayoutProps) => {
     navRef.current?.classList.add('hidden');
   }
 
-  const fileHandlerOnChange = (e : ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files)
+  const fileHandlerOnChange = async(e : ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if(files) {
+      const formData = new FormData()
+      for (let x = 0; x < files.length; x++) {
+        formData.append('files', files[x])
+      }
+      dispatch(uploadFilesAction(formData))
+
+    }
   }
 
   return (
