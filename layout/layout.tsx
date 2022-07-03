@@ -27,15 +27,11 @@ const Layout = ({children} : LayoutProps) => {
     'all',
     'images',
     'video',
-    'music',
-    'document',
   ]
   const pages = {
     '' : 'all',
     images : 'image',
     video : 'video',
-    music : 'audio',
-    document : 'text'
   }
   
   useEffect(() => {
@@ -46,7 +42,7 @@ const Layout = ({children} : LayoutProps) => {
   }, []);
 
   useEffect(() => {
-    setCurrentOption(category ? pages[category as '' | 'images' | 'video' | 'music' | 'document'] : 'all')
+    setCurrentOption(category ? pages[category as '' | 'images' | 'video'] : 'all')
   }, [category])
   
   const hideNav = () => {
