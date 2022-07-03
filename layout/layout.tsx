@@ -93,6 +93,7 @@ const Layout = ({children} : LayoutProps) => {
                 type='file'
                 className="hidden"
                 multiple={true}
+                accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp, video/mp4,video/x-m4v,video/*"
                 onChange={fileHandlerOnChange}
               />
             </div>
